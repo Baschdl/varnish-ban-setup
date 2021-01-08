@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  varnish:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8092:80'
+    networks:
+      - caching
+    restart: always
+
+  webserver:
+   image: nginxdemos/hello
+   networks:
+    - caching   
+
+networks:
+ caching:
